@@ -1,0 +1,115 @@
+/* layout */
+.appWrapper {
+    background-color: #F5F7FA; 
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.main {
+    flex: 1;
+    padding: 24px 16px;
+    min-width : 1000px;
+}
+.contentContainer {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+
+
+/* header */
+.header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 12px 24px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #ABBBDB;
+
+    box-shadow: 0 2px 6px rgba(44, 86, 166, 0.05);
+}
+
+.logoArea{
+    display: flex;
+    align-items: center;
+}
+.logoText{
+    font-size: 20px;
+    font-weight: 900;
+    color: #2C56A6;
+}
+
+.searchArea {
+    flex: 1;
+}
+.searchInput {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid #ABBBDB;
+    background-color: #F5F7FA;
+    color: #2C56A6;
+    font-size: 14px;
+}
+.searchInput::placeholder {
+    color: #ABBBDB;
+}
+
+.rightArea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.iconBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+.userInfo {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background-color: #E7EFFC;
+  border: 1px solid #ABBBDB;
+}
+.userInfo {
+  font-size: 13px;
+  color: #2C56A6;
+}
+
+@media (prefers-color-scheme: dark) {
+    .appWrapper {
+        background-color: #1E293B;
+    }
+    .header {
+        background-color: #0F172A;
+        border-bottom: 1px solid #2C56A6;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    }
+    .logoText {
+        color: #6CA9FF;
+    }
+    .searchInput {
+        border-color: #2C56A6;
+        background-color: #1E293B;
+        color: #E7EFFC;
+    }
+    .searchInput::placeholder {
+        color: #6CA9FF;
+    }
+    .iconButton {
+        color: #E7EFFC;
+    }
+    .userInfo {
+        background-color: #1E293B;
+        border-color: #2C56A6;
+    }
+    .userName {
+        color: #E7EFFC;
+    }
+}

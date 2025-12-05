@@ -1,0 +1,198 @@
+.form {
+  margin-top: 16px;
+  padding: 18px 16px;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  border: 1px solid #E7EFFC;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fieldRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.label {
+  width: 90px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2C56A6;
+  padding-top: 6px;
+}
+
+/* 입력 공통 스타일 */
+.input,
+.select,
+.textarea {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ABBBDB;
+  font-size: 13px;
+  background-color: #FFFFFF;
+  color: #2C56A6;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #ABBBDB;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+/* 이미지 필드 */
+.imageField {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fileLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #3A6DCC;
+  background-color: #E7EFFC;
+  color: #2C56A6;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.fileInput {
+  display: none;
+}
+
+/* 미리보기 */
+.previewGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.previewItem {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #E7EFFC;
+  background-color: #F5F7FA;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.removeButton {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: #FFFFFF;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* 체크박스 */
+.checkboxLabel {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #5073B5;
+}
+
+/* 버튼 영역 */
+.buttonRow {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cancelButton {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #ABBBDB;
+  background-color: #FFFFFF;
+  color: #2C56A6;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.submitButton {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  background-color: #3A6DCC;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= 다크 모드 ================= */
+
+@media (prefers-color-scheme: dark) {
+  .form {
+    background-color: #0F172A;
+    border-color: #2C56A6;
+  }
+
+  .label {
+    color: #E7EFFC;
+  }
+
+  .input,
+  .select,
+  .textarea {
+    border-color: #2C56A6;
+    background-color: #0F172A;
+    color: #E7EFFC;
+  }
+
+  .input::placeholder,
+  .textarea::placeholder {
+    color: #6CA9FF;
+  }
+
+  .fileLabel {
+    border-color: #2C56A6;
+    background-color: #1E293B;
+    color: #E7EFFC;
+  }
+
+  .previewItem {
+    border-color: #2C56A6;
+    background-color: #1E293B;
+  }
+
+  .checkboxLabel {
+    color: #E7EFFC;
+  }
+
+  .cancelButton {
+    background-color: #1E293B;
+    border-color: #2C56A6;
+    color: #E7EFFC;
+  }
+
+  .submitButton {
+    background-color: #2C56A6;
+    color: #E7EFFC;
+  }
+}

@@ -1,0 +1,58 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ABBBDB;
+  resize: vertical;
+  font-size: 13px;
+  background-color: #FFFFFF;
+  color: #2C56A6;
+}
+
+.textarea::placeholder {
+  color: #ABBBDB;
+}
+
+.replyTextarea {
+  margin-left: 24px;
+}
+
+.bottomRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitButton {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  background-color: #3A6DCC;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 다크 모드 */
+@media (prefers-color-scheme: dark) {
+  .textarea {
+    border-color: #2C56A6;
+    background-color: #0F172A;
+    color: #E7EFFC;
+  }
+
+  .textarea::placeholder {
+    color: #6CA9FF;
+  }
+
+  .submitButton {
+    background-color: #2C56A6;
+    color: #E7EFFC;
+  }
+}

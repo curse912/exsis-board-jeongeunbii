@@ -1,0 +1,56 @@
+.section {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #E7EFFC;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2C56A6;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sortSelect {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #ABBBDB;
+  background-color: #FFFFFF;
+  font-size: 13px;
+}
+
+.replyFormWrapper {
+  margin-top: 4px;
+}
+
+/* 다크 모드 */
+@media (prefers-color-scheme: dark) {
+  .section {
+    border-top-color: #2C56A6;
+  }
+
+  .title {
+    color: #E7EFFC;
+  }
+
+  .sortSelect {
+    border-color: #2C56A6;
+    background-color: #0F172A;
+    color: #E7EFFC;
+  }
+}
