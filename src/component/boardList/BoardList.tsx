@@ -4,6 +4,7 @@ import list from "./BoardList.module.css";
 import BoardListHeader from "./BoardListHeader";
 import PostList from "./PostList";
 import { useNavigate } from "react-router-dom";
+import { BOARD_CATEGORIES } from "../../data/categories";
 
 export type SortOption = "latest" | "likes";
 
@@ -14,9 +15,7 @@ const BoardList: React.FC = () => {
 
     // 카테고리 목록
     const categories = useMemo(() => {
-        const set = new Set<string>();
-        dummyPosts.forEach((post) => set.add(post.category));
-        return ["전체", ...Array.from(set)];
+        return ["전체", ...BOARD_CATEGORIES];
     }, []);
 
     // 정렬
@@ -26,7 +25,7 @@ const BoardList: React.FC = () => {
 
         if(sortOption === "latest"){
             posts = [...posts].sort(
-                (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                (a, b) => new Date(b.createdAt).getTime()-new Date(a.createdAt).getTime()
             );
         }else if(sortOption === "likes"){
             posts = [...posts].sort((a,b) => b.likes - a.likes);
@@ -49,11 +48,12 @@ const BoardList: React.FC = () => {
                 categories={categories}
                 selectedCategory = {selectedCategory}
                 onChangeCategory = {setselectedCategory}
+            />
+            <PostList posts={sortPosts} onClickPost={handleClickDetail}
                 sortOption = {sortOption}
                 onChangeSort = {setsortOption}
                 onClickWrite = {handleClickwrite}
             />
-            <PostList posts={sortPosts} onClickPost={handleClickDetail}/>
         </section>
     );
 };

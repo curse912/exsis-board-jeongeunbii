@@ -6,11 +6,10 @@ import form from "./CommentForm.module.css";
 type CommentFormProps = {
     onSubmit: (content: string) => void;
     placeholder?: string;
-    isReply?: boolean;
 };
 
 const CommentForm: React.FC<CommentFormProps> = ({
-    onSubmit, placeholder = "댓글을 입력해 주세요.", isReply = false,
+    onSubmit, placeholder = "댓글을 입력해 주세요."
 }) => {
     const [content, setContent] = useState("");
 
@@ -24,17 +23,15 @@ const CommentForm: React.FC<CommentFormProps> = ({
     return (
         <form className={form.form} onSubmit={handleSubmit}>
             <textarea
-                className={`${form.textarea} ${isReply ? form.replyTextarea : ""}`}
+                className={form.textarea}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder={placeholder}
-                rows={isReply ? 2 : 3}
+                rows={3}
             />
-            <div className={form.bottomRow}>
-                <button type="submit" className={form.submitButton}>
-                    {isReply ? "답글 등록" : "댓글 등록"}
-                </button>
-            </div>
+            <button type="submit" className={form.submitBtn}>
+                등록
+            </button>
         </form>
     );
 };

@@ -1,51 +1,37 @@
 import type React from "react";
 import { useMemo, useState } from "react";
 import writeF from "./BoardWriteForm.module.css";
+import type { BoardCategory } from "../../data/categories";
 
 export type BoardWriteFormValues = {
-    category: string;
+    category: BoardCategory;
     title: string;
     content: string;
     commentBlocked: boolean;
-    images: File[];
+    image: File | null;
 };
 
 type BoardWriteFormProps = {
-    categories: string[];
+    categories: readonly BoardCategory[];
     onSubmit: (values: BoardWriteFormValues) => void;
     onCancel: () => void;
 }
 const BoardWriteForm: React.FC<BoardWriteFormProps> = ({ categories, onSubmit, onCancel }) => {
 
-    const [category, setCategory] = useState<string>(categories[0] ?? "");
+    const [category, setCategory] = useState<BoardCategory>(categories[0]);
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
     const [commentBlocked, setCommentBlocked] = useState<boolean>(false);
-    const [images, setImages] = useState<File[]>([]);
+    const [image, setImage] = useState<File | null>(null);
 
-    const previews = useMemo(
-        () => images.map((file) => URL.createObjectURL(file)),[images]
+    const preview = useMemo(
+        () => (image ? URL.createObjectURL(image) : null),[image]
     );
 
     const handleChangeFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e. target.files;
-        if(!files) return;
-
-        const newFiles = Array.from(files);
-        
-        if(images.length + newFiles.length > 5){
-            alert("이미지는 최대 5개까지만 첨부 가능합니다.");
-        }
-
-        const availableSlots = Math.max(0, 5 - images.length);
-        const filesToAdd = newFiles.slice(0, availableSlots);
-
-        setImages((prev) => [...prev, ...filesToAdd]);
-
+        const file = e.target.files?.[0] || null;
+        setImage(file);
         e.target.value = "";
-    };
-    const handleRemoveImage = (index: number) => {
-        setImages((prev) => prev.filter((_,i) => i !== index));
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -64,7 +50,7 @@ const BoardWriteForm: React.FC<BoardWriteFormProps> = ({ categories, onSubmit, o
             return;
         }
 
-        onSubmit({ category, title, content, commentBlocked, images });
+        onSubmit({ category, title, content, commentBlocked, image });
     };
 
     return(
@@ -80,7 +66,7 @@ const BoardWriteForm: React.FC<BoardWriteFormProps> = ({ categories, onSubmit, o
                     id="category"
                     className={writeF.select}
                     value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    onChange={(e) => setCategory(e.target.value as BoardCategory)}
                 >
                     <option value="" disabled>
                         카테고리를 선택해 주세요
@@ -128,7 +114,7 @@ const BoardWriteForm: React.FC<BoardWriteFormProps> = ({ categories, onSubmit, o
                 <span className={writeF.label}>이미지 첨부</span>
                 <div className={writeF.imageField}>
                 <label className={writeF.fileLabel}>
-                    파일 선택 (최대 5개)
+                    파일 선택 (1개)
                     <input
                         type="file"
                         accept="image/*"
@@ -138,24 +124,20 @@ const BoardWriteForm: React.FC<BoardWriteFormProps> = ({ categories, onSubmit, o
                     />
                 </label>
 
-                {images.length > 0 && (
-                    <div className={writeF.previewGrid}>
-                    {previews.map((src, index) => (
-                        <div key={index} className={writeF.previewItem}>
-                            <img
-                                src={src}
-                                alt={`preview-${index}`}
-                                className={writeF.previewImage}
-                            />
-                            <button
-                                type="button"
-                                className={writeF.removeButton}
-                                onClick={() => handleRemoveImage(index)}
-                            >
-                                제거
-                            </button>
-                        </div>
-                    ))}
+                {preview && (
+                    <div className={writeF.previewItem}>
+                        <img
+                            src={preview}
+                            alt="preview"
+                            className={writeF.previewImage}
+                        />
+                        <button
+                            type="button"
+                            className={writeF.removeButton}
+                            onClick={() => setImage(null)}
+                        >
+                            제거
+                        </button>
                     </div>
                 )}
                 </div>

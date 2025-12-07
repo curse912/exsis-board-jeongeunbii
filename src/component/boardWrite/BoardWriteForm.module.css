@@ -1,12 +1,15 @@
 .form {
   margin-top: 16px;
   padding: 18px 16px;
+  padding-top: 80px;
   border-radius: 12px;
   background-color: #FFFFFF;
   border: 1px solid #E7EFFC;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 14px;
+  min-height: 700px;
 }
 
 .fieldRow {
@@ -16,8 +19,8 @@
 }
 
 .label {
-  width: 90px;
-  font-size: 14px;
+  width: 130px;
+  font-size: 20px;
   font-weight: 600;
   color: #2C56A6;
   padding-top: 6px;
@@ -31,7 +34,7 @@
   padding: 8px 10px;
   border-radius: 8px;
   border: 1px solid #ABBBDB;
-  font-size: 13px;
+  font-size: 15px;
   background-color: #FFFFFF;
   color: #2C56A6;
 }
@@ -58,11 +61,11 @@
   align-items: center;
   justify-content: center;
   padding: 6px 12px;
-  border-radius: 999px;
+  border-radius: 8px;
   border: 1px solid #3A6DCC;
   background-color: #E7EFFC;
   color: #2C56A6;
-  font-size: 13px;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -112,7 +115,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
+  font-size: 15px;
   color: #5073B5;
 }
 
@@ -126,21 +129,21 @@
 
 .cancelButton {
   padding: 8px 14px;
-  border-radius: 999px;
+  border-radius: 10px;
   border: 1px solid #ABBBDB;
   background-color: #FFFFFF;
   color: #2C56A6;
-  font-size: 13px;
+  font-size: 15px;
   cursor: pointer;
 }
 
 .submitButton {
   padding: 8px 16px;
-  border-radius: 999px;
+  border-radius: 10px;
   border: none;
   background-color: #3A6DCC;
   color: #FFFFFF;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
 }

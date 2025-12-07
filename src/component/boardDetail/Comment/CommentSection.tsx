@@ -3,6 +3,7 @@ import { dummyComments, type Comment } from "../../../data/dummyPosts";
 import section from './CommentSection.module.css';
 import CommentForm from "./CommentFrom";
 import CommentList from "./CommentList";
+import { CURRENT_USER } from "../../../data/currentUser";
 
 type CommentSectionProps = {
     postId : number;
@@ -11,23 +12,27 @@ type CommentSectionProps = {
 export type CommentSortOption = "latest" | "thread";
 
 const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
-    const currentUser = "user1";
-
+    const currentUser = CURRENT_USER.userId;
     const [comments, setComments] = useState<Comment[]> (
         dummyComments.filter((c) => c.postId === postId)
     );
+    const [commnetClose, setCommnetClose] = useState<boolean>(false);
+    
+    const sortedComments = useMemo(
+        () =>
+            [...comments].sort(
+                (a, b) =>
+                new Date(b.createdAt).getTime()-new Date(a.createdAt).getTime()
+            ),
+        [comments]
+    );
 
-    const [sortOption, setsortOption] = useState<CommentSortOption>("latest");
-    const [replyTargetId, setreplyTargetId] = useState<number | null> (null);
-
-    const handleChangeSort = (value: CommentSortOption) => {
-        setsortOption(value);
-    };
-
-    const handleSubmitComment = (content: string, parentId?: number) => {
+    // 핸들러    
+    const handleSubmitComment = (content: string) => {
         if(!content.trim()) return;
 
-        const newId = comments.length > 0 ? Math.max(...comments.map((c) => c.id)) + 1 : 1;
+        const newId = comments.length > 0 ? 
+            Math.max(...comments.map((c) => c.id)) + 1 : 1;
 
         const now = new Date();
         const format = `${now.getFullYear()}
@@ -42,11 +47,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
             author: currentUser,
             content,
             createdAt: format,
-            ...(parentId ? {parentId} : {})
         };
 
         setComments((prev) => [...prev, newComment]);
-        setreplyTargetId(null);
     }
 
     const handleDeleteComment = (id:number) => {
@@ -66,35 +69,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
         alert(`댓글 ID: ${id} 신고 기능 예정`);
     };
 
-    const handleReplyClick = (id: number) => {
-        setreplyTargetId((prev) => (prev === id? null : id));
-    }
-
-    const sortedComments = useMemo(() => {
-        if(sortOption === "latest"){
-            return [...comments].sort(
-                    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-                );
-        }
-        
-        const roots = comments.filter((c) => !c.parentId)
-            .sort(
-                (a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-            );
-        const children = comments.filter((c) => !!c.parentId);
-        const result : Comment[] = [];
-
-        roots.forEach((root) => {
-            result.push(root);
-            const replies = children.filter((c) => c.parentId === root.id)
-                .sort(
-                    (a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-                );
-            result.push(...replies);
-        });
-
-        return result;
-    },[comments, sortOption]);
+    const handleToggleComments = () => {
+        setCommnetClose((prev) => !prev);
+    };
 
     const totalCount = comments.length;
 
@@ -104,46 +81,29 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
                 <h2 className={section.title}>댓글 {totalCount}</h2>
 
                 <div className={section.tools}>
-                    <select className={section.sortSelect}
-                        value={sortOption}
-                        onChange={(e) =>
-                        handleChangeSort(e.target.value as CommentSortOption)
-                        }
-                    >
-                        <option value="latest">최신순</option>
-                        <option value="thread">답글순</option>
-                    </select>
+                    <button type="button" className={section.closeBtn} onClick={handleToggleComments}>
+                        {commnetClose? "댓글 펼치기▼" : "댓글 접기▲"}
+                    </button>
                 </div>
             </div>
+            {!commnetClose && (
+                <>
+                    {/* 댓글 작성 */}
+                    <CommentForm
+                        onSubmit={handleSubmitComment}
+                        placeholder="댓글을 입력해 주세요."
+                    />
 
-            {/* 댓글 작성 */}
-            <CommentForm
-                onSubmit={handleSubmitComment}
-                placeholder="댓글을 입력해 주세요."
-            />
-
-            {/* 댓글 리스트 */}
-            <CommentList
-                comments={sortedComments}
-                currentUser={currentUser}
-                onReplyClick={handleReplyClick}
-                onDelete={handleDeleteComment}
-                onReport={handleReportComment}
-                replyTargetId={replyTargetId}
-            />
-
-            {/* 대댓글 작성 폼 */}
-            {replyTargetId && (
-                <div className={section.replyFormWrapper}>
-                <CommentForm
-                    onSubmit={(content) =>
-                        handleSubmitComment(content, replyTargetId || undefined)
-                    }
-                    placeholder="답글을 입력해 주세요."
-                    isReply
-                />
-                </div>
+                    {/* 댓글 리스트 */}
+                    <CommentList
+                        comments={sortedComments}
+                        currentUser={currentUser}
+                        onDelete={handleDeleteComment}
+                        onReport={handleReportComment}
+                    />
+                </>
             )}
+
         </section>
     );
 };

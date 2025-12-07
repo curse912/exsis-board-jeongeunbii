@@ -1,25 +1,49 @@
 import type React from "react";
-import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { dummyPosts } from "../data/dummyPosts";
+import { dummyPosts, type Post } from "../data/dummyPosts";
 import BoardWriteForm, { type BoardWriteFormValues } from "../component/boardWrite/BoardWriteForm";
+import { BOARD_CATEGORIES } from "../data/categories";
+import { CURRENT_USER } from "../data/currentUser";
 
 
 const BoardWritePage: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const categories = useMemo(() => {
-        const set = new Set<string>();
-        dummyPosts.forEach((p) => set.add(p.category));
-        return Array.from(set);
-    },[]);
+    const categories = BOARD_CATEGORIES;
 
     const handleSubmit = (values: BoardWriteFormValues) => {
-        console.log("작성 폼 값",values);
-        alert("글 작서이 완료 되었습니다.");
-        
-        navigate("/");
+        const newId =
+        dummyPosts.length > 0
+            ? Math.max(...dummyPosts.map((p) => p.id)) + 1
+            : 1;
+
+        const now = new Date();
+        const formatted = `${now.getFullYear()}
+            -${String( now.getMonth() + 1 ).padStart(2, "0")}
+            -${String(now.getDate()).padStart( 2, "0")} 
+            ${String(now.getHours()).padStart(2, "0")}
+            :${String(now.getMinutes()).padStart(2, "0")}`;
+
+        const thumbnailUrl = values.image ? URL.createObjectURL(values.image) : undefined;
+
+        const newPost: Post = {
+            id: newId,
+            title: values.title,
+            category: values.category,
+            author: CURRENT_USER.userId,
+            createdAt: formatted,
+            views: 0,
+            likes: 0,
+            commentsCount: 0,
+            content: values.content,
+            commentBlocked: values.commentBlocked,
+            thumbnailUrl,
+        };
+
+        dummyPosts.unshift(newPost);
+        alert("글 작성이 완료되었습니다.");
+        navigate(`/detail/${newId}`);
     };
 
     const handleCancel = () => {

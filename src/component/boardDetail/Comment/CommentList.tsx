@@ -6,14 +6,12 @@ import CommentItem from "./CommentItem";
 type CommentListProps = {
     comments : Comment[];
     currentUser: string;
-    replyTargetId: number | null;
-    onReplyClick: (id: number) => void;
     onDelete: (id: number) => void;
     onReport: (id: number) => void;
 };
 
 const CommentList: React.FC<CommentListProps> = ({
-    comments, currentUser,replyTargetId, onReplyClick, onDelete, onReport
+    comments, currentUser, onDelete, onReport
 }) => {
     if(comments.length === 0){
         return <div className={cList.empty}>댓글이 존재하지 않습니다.</div>;
@@ -26,9 +24,6 @@ const CommentList: React.FC<CommentListProps> = ({
                     key={comment.id}
                     comment={comment}
                     currentUser={currentUser}
-                    isReply={!!comment.parentId}
-                    isReplyTarget={replyTargetId === comment.id}
-                    onReplyClick={onReplyClick}
                     onDelete={onDelete}
                     onReport={onReport}
                 />

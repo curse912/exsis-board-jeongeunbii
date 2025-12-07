@@ -2,63 +2,167 @@
     padding: 20px 18px;
     border-radius: 12px;
     background-color: #FFFFFF;
-    border: 1px solid #E7EFFC;
+    border: 5px solid #ABBBDB;
     display: flex;
     flex-direction: column;
     gap: 18px;
 }
+
+/* ===== 목록으로 ===== */
+.topActionRow {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+.listBtn {
+    padding: 20px;
+    border:none;
+    background-color:transparent;
+    font-size: 15px;
+    cursor: pointer;
+    color: #8B8B8B;
+}
+
 
 /* ===== 헤더 ===== */
 
 .header {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 20px;
+    border-bottom: 3px solid #ABBBDB;
+    padding: 50px 20px 30px 20px;
 }
 
-.category {
-    display: inline-flex;
-    align-self: flex-start;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    background-color: #E7EFFC;
-    color: #2C56A6;
+.titleArea{
+    display: flex;
+    align-items: end;
+    gap:8px;
 }
 
 .title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
-    color: #2C56A6;
+    color: #3D69B0;
     margin: 0;
+}
+
+.author{
+    font-size: 15px;
+    color: #798DB4;
 }
 
 .row {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 4px;
-    font-size: 12px;
-    color: #ABBBDB;
+    font-size: 15px;
+    color: #798DB4;
 }
 
-.item {
-    white-space: nowrap;
+.item{
+    color: #006AFF;
 }
 
-.divider {
-    color: #ABBBDB;
-}
 
-/* ===== 액션 바: 좋아요/싫어요/공유/신고 ===== */
+
+/* ===== 공유/신고 ===== */
 
 .section1 {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
     gap: 12px;
-    padding: 8px 10px;
+    padding: 0px 20px;
     border-radius: 10px;
-    background-color: #F5F7FA;
+}
+
+.utilGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.textBtn {
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    color: #5073B5;
+    cursor: pointer;
+    padding: 4px 6px;
+}
+
+/* ===== 작성자 버튼 ===== */
+
+.author {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.editBtn {
+    padding: 8px;
+    border: none;
+    background-color: transparent;
+    color: #3D69B0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    padding: 8px;
+    border: none;
+    background-color: transparent; 
+    color: #D9534F;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* ===== 본문 영역 ===== */
+
+.section2 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+}
+
+.imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:auto;
+    border-radius: 20px;
+    min-height: 250px;
+    min-width: 300px;
+}
+
+.image {
+    max-width: 100%;
+    max-height: 320px;
+    
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+    display: block;
+}
+
+.contentText {
+    min-height: 150px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #5073B5;
+}
+
+.contentText p {
+    margin: 0 0 8px;
+}
+
+/* ===== 좋아요/싫어요 ===== */
+.section3{
+    display: flex;
+    justify-content: center;
 }
 
 .reaction {
@@ -70,104 +174,34 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid #E7EFFC;
-    background-color: #FFFFFF;
-    font-size: 13px;
+    border: none;
+    background-color: transparent;
     cursor: pointer;
 }
 
-.reactionText {
-    font-size: 13px;
+.reactionBtn:active{
+    transform: scale(0.95);
+}
+
+.reactionIcon {
+    width: 100px;
+    height: 100px;
 }
 
 .reactionCount {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 30px;
+    font-weight: 400;
     color: #3A6DCC;
 }
 
-.utilGroup {
-    display: flex;
-    gap: 8px;
-}
 
-.textBtn {
-    border: none;
-    background: transparent;
-    font-size: 13px;
-    color: #5073B5;
-    cursor: pointer;
-    padding: 4px 6px;
-}
-
-/* ===== 본문 영역 ===== */
-
-.section2 {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.imageWrapper {
-    width: 100%;
-    max-height: 320px;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: #F5F7FA;
-}
-
-.image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.contentText {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #5073B5;
-}
-
-.contentText p {
-    margin: 0 0 8px;
-}
-
-/* ===== 작성자 버튼 ===== */
-
-.author {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-}
-
-.secondaryBtn {
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: 1px solid #ABBBDB;
-    background-color: #FFFFFF;
-    color: #2C56A6;
-    font-size: 13px;
-    cursor: pointer;
-}
-
-.dangerBtn {
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: none;
-    background-color: #E05353; /* 약간 눈에 띄는 빨강 */
-    color: #FFFFFF;
-    font-size: 13px;
-    cursor: pointer;
-}
 
 /* ===== 댓글 placeholder ===== */
 
-.section3 {
+.section4 {
     margin-top: 12px;
-    padding-top: 16px;
-    border-top: 1px solid #E7EFFC;
+    padding: 20px;
+    border-top: 3px solid #ABBBDB;
 }
 
 .commentTitle {
@@ -186,30 +220,32 @@
 /* ===== 다크 모드 ===== */
 
 @media (prefers-color-scheme: dark) {
-    .detailWrapper {
-        background-color: #0F172A;
-        border-color: #2C56A6;
+    .listBtn {
+        color: #8B8B8B;
     }
 
-    .category {
-        background-color: #1E293B;
-        color: #6CA9FF;
+    .detailWrapper {
+        background-color: #0F172A;
+        border-color: #1B305B;
+    }
+
+    .header{
+        border-bottom: 5px solid #1B305B;
     }
 
     .title {
-        color: #E7EFFC;
+        color: #6CA9FF;
     }
 
     .row {
-        color: #6CA9FF;
+        color: #798DB4;
     }
 
-    .divider {
-        color: #6CA9FF;
+    .infoArea{
+        color: #FFFFFF;
     }
-
-    .section1 {
-        background-color: #1E293B;
+    .item{
+        color: #4C7FFF;
     }
 
     .reactionBtn {
@@ -223,24 +259,18 @@
     }
 
     .textBtn {
-        color: #6CA9FF;
-    }
-
-    .imageWrapper {
-        background-color: #1E293B;
+        color: #ffffff;
     }
 
     .contentText {
         color: #E7EFFC;
     }
 
-    .secondaryBtn {
-        background-color: #1E293B;
-        border-color: #2C56A6;
-        color: #E7EFFC;
+    .editBtn {
+        color: #6CA9FF;
     }
 
-    .section3 {
+    .section4 {
         border-top-color: #2C56A6;
     }
 

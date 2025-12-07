@@ -1,25 +1,29 @@
 import { useState } from 'react';
 import layout from './layout.module.css';
-// import {iconImg} from '../../assets/images';
+import { useNavigate } from 'react-router-dom';
+import { CURRENT_USER } from '../../data/currentUser';
 
 const Header = () => {
     const [keyword, setKeyword] = useState('');
+    const navigate = useNavigate();
+
+    const logoHandler = () => {
+        navigate("/");
+    }
 
     return (
         <div className={layout.header}>
-            <div className={layout.logoArea}>
-                <span className={layout.logoText}>Board</span>
+            <div className={layout.logoArea} onClick={logoHandler}>
+                <span className={layout.logoText}>EXSIS</span>
             </div>
             <div className={layout.searchArea}>
-                {/* <img className={layout.searchbtn} src={iconImg.react} /> */}
                 <input type='text' placeholder='Search here....🔎' 
                        value={keyword} className={layout.searchInput}
                        onChange={(e) => setKeyword(e.target.value)}/>
             </div>
             <div className={layout.rightArea}>
-                <button className={layout.iconBtn}>🔔</button>
-                <div className={layout.useInfo}>
-                    <span className={layout.userName}>xxx님..</span>
+                <div className={layout.userInfo}>
+                    <span>{CURRENT_USER.userId}님..</span>
                 </div>
             </div>
         </div>
